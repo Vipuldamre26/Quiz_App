@@ -62,6 +62,8 @@ const Quiz = () => {
             setTotal(prev => prev + 1);
             let div = document.querySelector('.quizapp');
             div.innerHTML = `Your Score is ${total+1}`;
+            div.style.height = '10rem';
+            div.style.fontSize = '3rem';
         }
         else if(index + 1 < 10 && data[index].correct_answer !== e.target.innerText){
             setIndex(prev => prev + 1);
@@ -70,6 +72,9 @@ const Quiz = () => {
         else{
             let div = document.querySelector('.quizapp');
             div.innerHTML = `Your Score is ${total}`;
+            div.style.height = '10rem';
+            div.style.fontSize = '3rem';
+
         }
 
     }
@@ -86,6 +91,10 @@ const Quiz = () => {
         }
         else if(index === 9){
             console.log('done');
+            let div = document.querySelector('.quizapp');
+            div.innerHTML = `Your Score is ${total}`;
+            div.style.height = '10rem';
+            div.style.fontSize = '3rem';
         }
     }
     
@@ -105,7 +114,7 @@ const Quiz = () => {
                     ) : (
 
                         <div className="options">
-                        <p>{data[index].question}</p>
+                        <p>Q. {index+1}: {data[index].question}</p>
                        
                             {
                                 data[index].incorrect_answers.map((answer, index) => {
@@ -122,7 +131,7 @@ const Quiz = () => {
 
                 <strong>Time left: {time} seconds</strong>
 
-                <button onClick={skipQuestion}>Skip Question</button>
+                <button className="btn" onClick={skipQuestion}>Skip Question</button>
             </div>
         </div>
     );
