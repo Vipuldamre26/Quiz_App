@@ -41,9 +41,6 @@ const Quiz = () => {
             if (time > 0) {
                 setTime(time - 1);
             }
-            // else if(time === 0 && index + 1 <= 10){
-            //     setIndex(prev => prev + 1)
-            // }
         }, 1000);
 
         return () => clearTimeout(timer);
@@ -56,13 +53,23 @@ const Quiz = () => {
         console.log(e.target.innerText);
 
         
-        if(index + 1 <= 10 && data[index].correct_answer === e.target.innerText){
+        if(index + 1 < 10 && data[index].correct_answer === e.target.innerText){
             setTotal(prev => prev + 1);
             setIndex(prev => prev + 1);
             setTime(10);
         }
-        else if(index + 1 <= 10){
+        else if(index + 1 <= 10 && data[index].correct_answer === e.target.innerText){
+            setTotal(prev => prev + 1);
+            let div = document.querySelector('.quizapp');
+            div.innerHTML = `Your Score is ${total+1}`;
+        }
+        else if(index + 1 < 10 && data[index].correct_answer !== e.target.innerText){
             setIndex(prev => prev + 1);
+            setTime(10);
+        }
+        else{
+            let div = document.querySelector('.quizapp');
+            div.innerHTML = `Your Score is ${total}`;
         }
 
     }
@@ -73,10 +80,13 @@ const Quiz = () => {
     const skipQuestion = () => {
         // setIndex(prev => prev + 1);
     
-        if(time < 10){
+        if(index < 9){
             setIndex(prev => prev + 1);
+            setTime(10);
         }
-        setTime(10);
+        else if(index === 9){
+            console.log('done');
+        }
     }
     
     // *******************************************************************
